@@ -1,0 +1,47 @@
+#sp2{
+    color:firebrick;
+}
+
+#sp1{
+    margin:100px;
+    padding: 100px; ;
+    color:blue; 
+    
+}
+p, span {
+    color: coral;
+}
+.fuente{
+    font-family: Arial, Helvetica, sans-serif;
+}
+span::after{
+    content:"xxxx" '/A'; white-space:pre;
+}
+div ~p{
+    color:crimson;
+
+}
+div > p{
+    color:darkmagenta;
+}
+#div1{
+    background-color: blueviolet;
+    padding: 25px;
+    text-align: center;
+}
+#div1:hover{
+    background-color: cyan;
+}
+.pressMe{
+    background-color: brown;
+    padding: 25px;
+    text-align: center;
+}
+a:hover{
+    color:aqua;
+    font-size: 54px;
+}
+a[target]{
+    background-color: chartreuse;
+    font-size: 25px;
+}
