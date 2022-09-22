@@ -1,0 +1,34 @@
+.Header{
+    background-color: aquamarine;
+    height: 30vh;
+}
+.menu{
+    background-color: blueviolet;
+     height: 10vh;
+}
+.contenido{
+    background-color: red;
+width: 85%;
+
+}
+
+.publicidad{
+    background-color:darkmagenta;
+    height:80vh;
+    width: 15%;
+}
+
+.pie{
+    background-color: darkgreen;
+height:5vh;
+}
+.centro{
+    display:flex;
+}
+html, body{
+    height: 100%;
+}
+*{
+    text-align: center;
+    border:2px solid black;
+}
