@@ -42,6 +42,10 @@ listaTodo=document.getElementsByTagName("li")
 for (const tarea in listaTodo){
     if(Object.hasOwnProperty.call(listaTodo, tarea)){
         const element=listaTodo[tarea];
+        a =listaTodo(tarea).childNodes[0]
+        b =leer()
+        console.log("a")
+        console.log(listaTodo[tarea].childNodes[0].valueOf())
         // if(leer()==tarea.childNodes[0])
             console.log(tarea)
         }
