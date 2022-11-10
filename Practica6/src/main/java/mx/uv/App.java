@@ -1,7 +1,5 @@
 package mx.uv;
 import static spark.Spark.*;
-
-import com.google.gson.JsonObject;
 /**
  * Hello world!
  *
@@ -21,12 +19,7 @@ public class App
         
         post(path: "/", (req,res)-> {
             System.out.println(req.queryParams(queryParams:"email")+" " +req.queryParams(queryParams:))
-            System.out.pritln(req.body));
-            res.status(statusCode:200); // codigo respuesta
-            JsonObject oRespuesta = new JsonObject();
-            oRespuesta.addProperty(property, "msj", value:"hola");
-            oRespuesta.addProperty(property, "email", req.queryParams(queryParam:"email"));
-            return oRespuesta; 
+            System
 
         });
 
