@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monumento A Los Indios Verdes</title> <!-- cambiar el titulo a su monumento que estan trabajando -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/index.css">
+    <link href="css/album.css" rel="stylesheet">
+    <link href="/carousel.css" rel="stylesheet">
+  </head>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">Enciclopedia de monumentos de paises</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/index.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Paises
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../mexicoAlbum.html">México</a></li>
+                <li><a class="dropdown-item" href="../franciaAlbum.html">Francia</a></li>
+                <li><a class="dropdown-item" href="../italiaAlbum.html">Italia</a></li>
+                <li><a class="dropdown-item" href="../estadosUnidosAlbum.html">Estados Unidos</a></li><!--asi se debe llamar el album-->
+                
+                <li><a class="dropdown-item" href="../japonAlbum.html">Japon</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button><!--solo dejar un elemento del carrousel-->
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Indios_Verdes_01.jpg"
+            class="d-block w-100" alt="Aqui se muestra el Monumento A Los Indios Verdes"> <!--cambiar la etiqueta alt a su monumento-->
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Monumento A Los Indios Verdes</h1> <!--cambiar el titulo a su monumento-->
+            <p>El Monumento a los Indios Verdes es un monumento ubicado en la Ciudad de México, en la esquina de las calles
+              de Tacuba y de la Estrella, en la colonia Centro Histórico.</p> <!--cambiar la descripcion a su monumento-->
+          </div>
+        </div>
+      </div><!--Si tienen mas elementos de carrousel borrarlos y dejar solo el principal junto a la imagen-->
+      <!--Quitar los botones del carrousel-->
+      <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="button" class="btn btn-primary btn-lg" id="mostarDatos">Mostrar datos</button>
+      </div>
+      <hr class="featurette-divider">
+
+      <p id="dmonumentos"></p>
+
+  </main>
+
+
+  <footer class="container">
+    <p class="float-end"><a href="#">Regresar hasta arriba</a></p>
+    <p>&copy; Universidad Veracruzana &middot; <a href="/creditos.html">Creditos</a> &middot;
+  </footer>
+
+  <script>
+    var bmostrar=document.getElementById("mostarDatos");
+
+    
+      bmostrar.addEventListener("click", function () {
+      let id_ = 46    ;//MUUUUY IMPORTANTE CAMBIAR EL ID A SU MONUMENTO ALMACENADO EN LA BASE DE DATOS
+      console.log(id_);
+      axios.post("https://proyectoswbackend-production-5380.up.railway.app/datos", {
+      // axios.post("http://localhost:4567/datos", {
+        id: id_
+      })
+        .then(function (response) {
+          console.log(response);
+          if (response.data.status == true ){ 
+            document.getElementById("dmonumentos").innerHTML = "";
+             tabla("["+response.data.monumento+"]")
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    })
+
+    function tabla(response) {
+      const myObj = JSON.parse((response));
+      console.log(myObj)
+      let text = "<table class='table'>"
+      text += "<thead><tr><th>Datos de Monumento</th><th>informacion</th></tr></thead><tbody>"
+      for (let x in myObj) {
+        text += "<tr><th>Año de inicio de contruccion:</th><td>" + myObj[x].anioConstruccion + "</td></tr><td>" + "<tr><th>Año de inauguracion:</th><td>" + myObj[x].anioInaguracion + "</td></tr><td>" + "<tr><th>Altura:</th><td>" + myObj[x].altura + "</td></tr><td>" + "<tr><th>Largo:</th><td>" + myObj[x].largo + "</td></tr><td>" + "<tr><th>Materiales:</th><td>" + myObj[x].materiales + "</td></tr>";
+      }
+      text += "</tbody></table>"
+      document.getElementById("dmonumentos").innerHTML = text;
+    }
+  </script>
+</body>
+
+</html>
